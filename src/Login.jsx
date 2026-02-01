@@ -1,59 +1,55 @@
 import React, { useState } from "react";
 
-export default function LoginApp(){
-     const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [submit, setSubmit] = useState(false);
+export default function LoginApp() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e)=>{
-      e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-      if(!userName){
-        setError("username is required");
-        setSubmit(false);
-        return;
-      }
-
-      if(!password){
-        setError("password is required");
-        setSubmit(false);
-        return;
-      }
-
-      if(userName === "user" && password === "password"){
-        setError('');
-        setSubmit(true);
-      }else{
-        setError("Invalid username or password");
-        setSubmit(false);
-      }
+    if (!username || !password) {
+      setSubmitted(false);
+      return;
     }
 
-    return(
-        <div>
-        <h1>Login Page</h1>
-        {submit ? (<div>Welcome, {userName}</div>) : 
-        (<form onSubmit={handleSubmit}>
-            {error && <p>{error}</p>}
-            <label htmlFor="username">UserName:</label>
-            <input
-            id="username"
-             type="text"
-             value={userName}
-            placeholder="username"
-            onChange={(e)=>setUserName(e.target.value)}
-            required/>
-            <div>
-                <label htmlFor="password">Password:</label>
-                <input
-                id="password"
-                 type="password" value={password}
-                placeholder="password"
-                onChange={(e)=>setPassword(e.target.value)} required/>
-            </div>
-            <button type="submit">Submit</button>
-        </form>)}
-        </div>
-    )
+    if (username === "user" && password === "password") {
+      setError("");
+      setSubmitted(true);
+    } else {
+      setError("Invalid username or password");
+      setSubmitted(false);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Login Page</h1>
+
+      {submitted ? (
+        <div>Welcome, user</div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          {error && <p>{error}</p>}
+
+          <label>Username</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button type="submit">Submit</button>
+        </form>
+      )}
+    </div>
+  );
 }
