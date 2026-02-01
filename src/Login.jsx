@@ -37,14 +37,18 @@ export default function LoginApp(){
         (<form onSubmit={handleSubmit}>
             {error && <p>{error}</p>}
             <label htmlFor="username">UserName:</label>
-            <input type="text"
+            <input
+            id="username"
+             type="text"
              value={userName}
             placeholder="username"
             onChange={(e)=>setUserName(e.target.value)}
             required/>
             <div>
                 <label htmlFor="password">Password:</label>
-                <input type="password" value={password}
+                <input
+                id="password"
+                 type="password" value={password}
                 placeholder="password"
                 onChange={(e)=>setPassword(e.target.value)} required/>
             </div>
