@@ -9,9 +9,19 @@ export default function LoginApp(){
     const handleSubmit = (e)=>{
       e.preventDefault();
 
+      if(!userName){
+        setError("username is required");
+        setSubmit(false);
+        return;
+      }
+
+      if(!password){
+        setError("password is required");
+        setSubmit(false);
+        return;
+      }
+
       if(userName === "user" && password === "password"){
-        // setUserName(e.target.value);
-        // setPassword(e.target.value);
         setError('');
         setSubmit(true);
       }else{
